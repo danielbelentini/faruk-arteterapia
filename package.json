@@ -1,0 +1,18 @@
+{
+  "name": "faruk-arteterapia",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tema WordPress do site de Faruk, Arteterapeuta e Analista Junguiano",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch",
+    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --minify",
+    "vendor": "node scripts/copy-vendor.js",
+    "postinstall": "node scripts/copy-vendor.js"
+  },
+  "dependencies": {
+    "swiper": "^11.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

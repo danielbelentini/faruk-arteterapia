@@ -1,0 +1,211 @@
+/*
+ * Faruk Arteterapia — CSS de entrada do Tailwind.
+ * Compilado para assets/css/main.css com `npm run dev` ou `npm run build`.
+ */
+
+/* ------------------------------------------------------------------
+ * Fontes hospedadas localmente (self-hosted). Sem Google Fonts.
+ * Arquivos .woff2 esperados em assets/fonts/ (caminho relativo a este
+ * CSS compilado, que fica em assets/css/main.css).
+ * ---------------------------------------------------------------- */
+@font-face {
+	font-family: 'Cormorant Garamond';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/CormorantGaramond-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/Outfit-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('../fonts/Outfit-Medium.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Outfit';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('../fonts/Outfit-SemiBold.woff2') format('woff2');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+ * Base (equivalente ao index.css do protótipo, com as cores oficiais)
+ * ---------------------------------------------------------------- */
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		/* Âncoras (#grupos etc.) não ficam escondidas atrás do header fixo. */
+		scroll-padding-top: 5.5rem;
+	}
+
+	body {
+		@apply bg-creme font-sans text-marrom antialiased;
+		line-height: 1.6;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		@apply font-serif;
+		line-height: 1.2;
+	}
+
+	/* Foco visível para navegação por teclado. */
+	:focus-visible {
+		@apply outline outline-2 outline-offset-2 outline-terracota;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+}
+
+/* ------------------------------------------------------------------
+ * Componentes reutilizáveis (portados do protótipo)
+ * ---------------------------------------------------------------- */
+@layer components {
+	.btn-primary {
+		@apply inline-flex items-center justify-center gap-2 rounded-full bg-terracota px-7 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-terracota-dark hover:shadow-lg hover:shadow-terracota/25 active:translate-y-0;
+	}
+
+	.btn-secondary {
+		@apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-sage px-7 py-3.5 text-sm font-semibold text-sage-dark transition-all duration-300 hover:-translate-y-0.5 hover:bg-sage hover:text-white hover:shadow-lg hover:shadow-sage/20 active:translate-y-0;
+	}
+
+	.btn-whatsapp {
+		@apply inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1eb858] hover:shadow-lg hover:shadow-green-600/25 active:translate-y-0;
+	}
+
+	.btn-ghost {
+		@apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-marrom/70 transition-all duration-200 hover:bg-terracota/10 hover:text-terracota;
+	}
+
+	.section-padding {
+		@apply px-6 py-20 md:px-12 lg:px-16 lg:py-28;
+	}
+
+	.container-wide {
+		@apply mx-auto max-w-8xl;
+	}
+
+	.text-gradient {
+		@apply bg-gradient-to-r from-terracota via-terracota-light to-laranja bg-clip-text text-transparent;
+	}
+
+	.card-base {
+		@apply rounded-3xl bg-white shadow-sm ring-1 ring-marrom/5 transition-all duration-300;
+	}
+
+	/* Texto corrido das páginas legais (conteúdo do editor do WordPress). */
+	.legal-content {
+		@apply text-base leading-relaxed text-marrom/80;
+	}
+
+	.legal-content > * + * {
+		@apply mt-5;
+	}
+
+	.legal-content h2 {
+		@apply mt-12 font-serif text-3xl text-marrom;
+	}
+
+	.legal-content h3 {
+		@apply mt-8 font-serif text-2xl text-marrom;
+	}
+
+	.legal-content ul {
+		@apply list-disc space-y-2 pl-6;
+	}
+
+	.legal-content ol {
+		@apply list-decimal space-y-2 pl-6;
+	}
+
+	.legal-content a {
+		@apply font-medium text-terracota underline underline-offset-2 hover:text-terracota-dark;
+	}
+
+	.legal-content strong {
+		@apply font-semibold text-marrom;
+	}
+
+	.legal-content blockquote {
+		@apply border-l-4 border-laranja pl-5 text-marrom/70;
+	}
+
+	/* Pontos de navegação do carrossel de depoimentos. */
+	.t-dot {
+		@apply h-2 w-2 rounded-full bg-terracota/30 transition-all duration-300 hover:bg-terracota/50;
+	}
+
+	.t-dot.is-active {
+		@apply w-6 bg-terracota;
+	}
+
+	/* Hero: antes do Swiper iniciar (ou se ele falhar), mostra só o primeiro slide. */
+	.hero-carousel:not(.is-ready) .swiper-slide:not(:first-child) {
+		@apply hidden;
+	}
+}
+
+/* ------------------------------------------------------------------
+ * Ajustes globais
+ * ---------------------------------------------------------------- */
+
+/* Barra de rolagem personalizada (como no protótipo). */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: theme('colors.creme.dark');
+}
+
+::-webkit-scrollbar-thumb {
+	background: theme('colors.terracota.light');
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: theme('colors.terracota.DEFAULT');
+}
+
+/* Esconde a barra de rolagem (carrosséis). */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Cabeçalho fixo: respeita a barra de administração do WordPress. */
+.admin-bar #site-header {
+	top: 32px;
+}
+
+@media (max-width: 782px) {
+	.admin-bar #site-header {
+		top: 46px;
+	}
+}

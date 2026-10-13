@@ -1,0 +1,19 @@
+/*
+Theme Name: Faruk Arteterapia
+Theme URI: https://example.com/faruk-arteterapia
+Author: Daniel Belentini de Oliveira
+Author URI: https://example.com
+Description: Tema personalizado para o site de Faruk, Arteterapeuta e Analista Junguiano. Construído com Tailwind CSS e blocos do Gutenberg registrados via Carbon Fields. Os estilos reais são compilados em assets/css/main.css (npm run build).
+Version: 0.1.0
+Requires at least: 6.4
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: faruk-arteterapia
+*/
+
+/*
+ * Este arquivo existe apenas para o WordPress reconhecer o tema.
+ * Não escreva CSS aqui: a estilização é feita com Tailwind em
+ * assets/css/input.css e compilada para assets/css/main.css.
+ */

@@ -1,0 +1,24 @@
+# Dependências de desenvolvimento (recriadas com "npm install")
+node_modules/
+
+# Arquivos temporários e locais
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+.env
+.env.*
+.vscode/
+.idea/
+
+# Pacotes gerados
+*.zip
+
+# ATENÇÃO — estes itens PRECISAM ir para o Git (a Hostinger só puxa o repositório):
+#   assets/css/main.css        (gerado por "npm run build")
+#   assets/vendor/             (Swiper, copiado por "npm install")
+#   assets/fonts/*.woff2       (fontes locais)
+#   vendor/                    (Carbon Fields, "composer install --no-dev")
+#   package-lock.json e composer.lock

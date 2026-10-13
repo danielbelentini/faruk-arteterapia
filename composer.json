@@ -1,0 +1,10 @@
+{
+  "name": "faruk/faruk-arteterapia",
+  "description": "Tema WordPress do site de Faruk, Arteterapeuta e Analista Junguiano",
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.0",
+    "htmlburger/carbon-fields": "^3.6"
+  }
+}
