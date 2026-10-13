@@ -26,7 +26,7 @@ foreach ( $defaults as $key => $default ) {
 
 $extra = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section class="px-6 py-20 md:px-12 lg:px-16<?php echo esc_attr( $extra ); ?>">
+<section class="px-6 py-20 md:px-12 lg:px-16<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) . $extra ); ?>">
 	<div class="container-wide">
 		<div class="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-terracota via-terracota-dark to-sage-dark px-8 py-16 text-center md:px-16 md:py-20">
 			<div class="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-white/5 blur-2xl"></div>

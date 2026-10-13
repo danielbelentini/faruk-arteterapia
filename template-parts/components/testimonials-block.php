@@ -60,7 +60,7 @@ if ( $use_swiper ) {
 // Controles: com mais de 3 relatos, setas só a partir de md; com até 3, só pontos e só no celular.
 $controls_class = 'mt-8 flex items-center justify-center gap-4' . ( $many ? '' : ' md:hidden' );
 ?>
-<section class="section-padding<?php echo esc_attr( $extra ); ?>">
+<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'sand' ) . $extra ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-14 max-w-2xl text-center">

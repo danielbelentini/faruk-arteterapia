@@ -411,3 +411,27 @@ function faruk_nav_item_classes( array $classes, $item, $args ): array {
 	return array();
 }
 add_filter( 'nav_menu_css_class', 'faruk_nav_item_classes', 10, 3 );
+
+
+/**
+ * Classe de fundo da seção, a partir do campo "background" do bloco.
+ *
+ * Opções: 'default' (creme do site, sem classe), 'sand' (areia) e 'white'.
+ * Devolve a classe COM espaço na frente, pronta para concatenar.
+ *
+ * @param array<string,mixed> $fields  Campos do bloco.
+ * @param string              $default Fundo padrão do bloco ('default', 'sand' ou 'white').
+ */
+function faruk_section_bg_class( array $fields, string $default = 'default' ): string {
+	$value = ( isset( $fields['background'] ) && '' !== $fields['background'] ) ? (string) $fields['background'] : $default;
+
+	if ( 'sand' === $value ) {
+		return ' bg-creme-dark/50';
+	}
+
+	if ( 'white' === $value ) {
+		return ' bg-white';
+	}
+
+	return '';
+}

@@ -64,7 +64,7 @@ $themes = array(
 $section_id = sanitize_title( $text['section_id'] );
 $extra      = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding bg-creme-dark/50<?php echo esc_attr( $extra ); ?>">
+<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'sand' ) . $extra ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-12 max-w-2xl text-center">

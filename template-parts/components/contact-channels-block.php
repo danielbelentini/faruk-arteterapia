@@ -30,12 +30,16 @@ foreach ( $defaults as $key => $default ) {
 $show_instagram = empty( $fields['hide_instagram'] );
 $show_others    = empty( $fields['hide_others'] );
 $extra          = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
+$bg_first       = ( isset( $fields['background'] ) && '' !== $fields['background'] ) ? (string) $fields['background'] : 'default';
+// As seções seguintes alternam a partir do fundo escolhido para a primeira.
+$bg_second      = ( 'sand' === $bg_first ) ? 'default' : 'sand';
+$bg_third       = ( 'sand' === $bg_second ) ? 'default' : 'sand';
 $channels_grid  = $show_instagram ? 'grid gap-6 md:grid-cols-2' : 'mx-auto grid max-w-2xl gap-6';
 ?>
 <div class="<?php echo esc_attr( trim( $extra ) ); ?>">
 
 	<!-- Canais: WhatsApp e Instagram -->
-	<section class="section-padding">
+	<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) ); ?>">
 		<div class="container-wide">
 			<div class="<?php echo esc_attr( $channels_grid ); ?>">
 
@@ -92,7 +96,7 @@ $channels_grid  = $show_instagram ? 'grid gap-6 md:grid-cols-2' : 'mx-auto grid 
 	</section>
 
 	<!-- Atendimento: online e presencial -->
-	<section class="section-padding bg-creme-dark/50">
+	<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( array( 'background' => $bg_second ) ) ); ?>">
 		<div class="container-wide">
 			<div class="mx-auto mb-12 max-w-2xl text-center">
 				<span class="text-sm font-semibold uppercase tracking-wider text-terracota">
@@ -139,7 +143,7 @@ $channels_grid  = $show_instagram ? 'grid gap-6 md:grid-cols-2' : 'mx-auto grid 
 
 	<!-- Outros formatos -->
 	<?php if ( $show_others ) : ?>
-		<section class="section-padding">
+		<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( array( 'background' => $bg_third ) ) ); ?>">
 			<div class="container-wide">
 				<div class="mx-auto max-w-3xl">
 					<div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-terracota/10 to-sage/10 p-10 text-center ring-1 ring-marrom/5 md:p-14">

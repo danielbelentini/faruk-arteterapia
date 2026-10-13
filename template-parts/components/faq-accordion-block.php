@@ -39,9 +39,8 @@ if ( empty( $items ) ) {
 	$items = $defaults['items'];
 }
 
-$is_sand = ! isset( $fields['background'] ) || 'default' !== $fields['background'];
 $extra   = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
-$class   = 'section-padding' . ( $is_sand ? ' bg-creme-dark/50' : '' ) . $extra;
+$class   = 'section-padding' . faruk_section_bg_class( $fields, 'sand' ) . $extra;
 $uid     = wp_unique_id( 'faq-' );
 ?>
 <section class="<?php echo esc_attr( $class ); ?>">

@@ -75,7 +75,7 @@ $section_id      = ! empty( $fields['section_id'] ) ? sanitize_title( $fields['s
 $show_disclaimer = empty( $fields['hide_disclaimer'] );
 $extra           = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding<?php echo esc_attr( $extra ); ?>">
+<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) . $extra ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-14 max-w-2xl text-center">

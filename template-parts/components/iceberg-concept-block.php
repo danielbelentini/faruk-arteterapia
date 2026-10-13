@@ -26,12 +26,11 @@ foreach ( $defaults as $key => $default ) {
 }
 
 $side       = ( isset( $fields['iceberg_side'] ) && 'left' === $fields['iceberg_side'] ) ? 'left' : 'right';
-$is_sand    = isset( $fields['background'] ) && 'sand' === $fields['background'];
 $custom_id  = ! empty( $fields['custom_image'] ) ? absint( $fields['custom_image'] ) : 0;
 $uid        = wp_unique_id( 'iceberg-' );
 $extra      = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 
-$section_class = 'section-padding' . ( $is_sand ? ' bg-creme-dark/50' : '' ) . $extra;
+$section_class = 'section-padding' . faruk_section_bg_class( $fields, 'default' ) . $extra;
 $figure_class  = 'flex justify-center' . ( 'left' === $side ? ' lg:order-first' : '' );
 ?>
 <section class="<?php echo esc_attr( $section_class ); ?>">

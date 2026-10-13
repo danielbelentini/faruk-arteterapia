@@ -10,7 +10,7 @@ Tema WordPress sob medida para o site de **Faruk, Arteterapeuta e Analista Jungu
 |---|---|---|
 | Tema | PHP nativo (WordPress) | Sem page builders |
 | Estilos | Tailwind CSS v3 (CLI) | Compilado em `assets/css/main.css` |
-| Blocos | Gutenberg + Carbon Fields (`Block::make`) | 15 blocos; templates em `template-parts/components/` |
+| Blocos | Gutenberg + Carbon Fields (`Block::make`) | 19 blocos; templates em `template-parts/components/` |
 | Ícones | Lucide, SVG inline | `inc/icons.php` (sem biblioteca no navegador) |
 | Carrosséis | Swiper.js local | `assets/vendor/swiper/`, carregado só onde há o bloco |
 | Fontes | `.woff2` hospedadas no tema | Cormorant Garamond e Outfit (sem Google Fonts) |
@@ -26,7 +26,8 @@ faruk-arteterapia/
 ├── style.css                 Cabeçalho do tema (o CSS real é compilado)
 ├── functions.php             Constantes, menus, scripts, estilos, avisos
 ├── header.php / footer.php   Cabeçalho, menu, rodapé, banner de cookies
-├── index.php                 Template de reserva
+├── index.php                 Template de reserva (posts e demais)
+├── page.php                  Páginas em largura total (blocos)
 ├── page-legal.php            Modelo "Página Legal"
 ├── page-politica-de-privacidade.php / page-politica-de-cookies.php
 ├── tailwind.config.js        Cores, fontes e animações da identidade
@@ -52,7 +53,9 @@ faruk-arteterapia/
 
 ### Blocos do Gutenberg (categoria "Faruk Arteterapia")
 
-Hero Carrossel · Duas Portas de Entrada · Conceito Iceberg · Trajetória e Valores · Como Funciona · Linguagens e Materiais · Escopo e Limites · FAQ Perguntas Frequentes · Depoimentos · Canais de Contato · Chamada Final WhatsApp · Grupos e Vivências · Navegação por Âncoras · Escolas e Empresas · Supervisão para Arteterapeutas.
+Hero Carrossel · Hero de Página Interna · Duas Portas de Entrada · Conceito Iceberg · Sobre da Home · Definição · Perfil Sobre · Trajetória · Formação e Valores · Como Funciona · Linguagens e Materiais · Escopo e Limites · FAQ Perguntas Frequentes · Depoimentos · Canais de Contato · Chamada Final WhatsApp · Grupos e Vivências · Navegação por Âncoras · Escolas e Empresas · Supervisão para Arteterapeutas.
+
+**Fundo da seção:** todos os blocos de seção têm o campo "Fundo da seção" (Padrão/creme, Areia ou Branco; Linguagens e Materiais também tem a faixa verde escura). Alterne os fundos entre blocos vizinhos para separar as seções. No bloco Canais de Contato (3 seções), as seguintes alternam a partir do fundo escolhido. O Hero de Página Interna usa imagem de fundo opcional; sem imagem, mostra o degradê da marca (terracota ou verde sálvia).
 
 (O banner de cookies e o logo são componentes do tema, não blocos.)
 

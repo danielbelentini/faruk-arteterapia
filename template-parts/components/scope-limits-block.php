@@ -50,7 +50,7 @@ $card2 = $read_items( isset( $fields['card2_items'] ) ? $fields['card2_items'] :
 
 $extra = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section class="section-padding<?php echo esc_attr( $extra ); ?>">
+<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) . $extra ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-14 max-w-2xl text-center">

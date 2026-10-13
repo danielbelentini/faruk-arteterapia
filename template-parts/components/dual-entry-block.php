@@ -29,7 +29,7 @@ foreach ( $defaults as $key => $default ) {
 
 $extra_class = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section class="section-padding<?php echo esc_attr( $extra_class ); ?>">
+<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) . $extra_class ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-14 max-w-2xl text-center">

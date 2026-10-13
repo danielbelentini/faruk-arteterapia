@@ -246,8 +246,6 @@ function faruk_iceberg_defaults(): array {
 	);
 }
 
-
-
 /**
  * Textos padrão (provisórios) do bloco "Trajetória e Valores" — tela Sobre.
  *
@@ -291,6 +289,65 @@ function faruk_trajectory_defaults(): array {
 				'description' => 'O processo terapêutico como uma construção conjunta, em que terapeuta e cliente caminham juntos.',
 			),
 		),
+	);
+}
+
+/**
+ * Textos padrão (provisórios) do bloco "Hero de Página Interna".
+ *
+ * @return array<string,string>
+ */
+function faruk_internal_hero_defaults(): array {
+	return array(
+		'badge'     => 'Atendimento individual',
+		'title'     => 'Arteterapia Junguiana',
+		'subtitle'  => 'Um processo terapêutico individual onde a criação artística se encontra com a psique. Um espaço para escutar o que as palavras ainda não alcançam.',
+		'cta_label' => 'Falar pelo WhatsApp',
+	);
+}
+
+/**
+ * Textos padrão (provisórios) do bloco "Sobre da Home".
+ *
+ * @return array<string,string>
+ */
+function faruk_about_summary_defaults(): array {
+	return array(
+		'label'    => 'Quem acompanha',
+		'title'    => 'Faruk',
+		'subtitle' => 'Arteterapeuta e Analista Junguiano',
+		'bio_text' => "Há mais de uma década, caminha junto com pessoas em processos de autoconhecimento através da arte. Sua prática une a profundidade da psicologia junguiana com a liberdade da expressão criativa.\n\nAcredita que cada imagem criada é uma ponte entre o consciente e o inconsciente — um convite para escutar o que ainda não tem palavra.",
+		'btn_text' => 'Conhecer minha história',
+		'btn_url'  => '/sobre/',
+	);
+}
+
+/**
+ * Textos padrão (provisórios) do bloco "Definição".
+ *
+ * @return array<string,string>
+ */
+function faruk_definition_defaults(): array {
+	return array(
+		'eyebrow'         => 'Definição',
+		'heading'         => 'O que é arteterapia?',
+		'text'            => 'Arteterapia é uma modalidade de terapia que utiliza a expressão artística como ferramenta principal de autoconhecimento. Através do contato com diferentes materiais e linguagens, é possível acessar emoções, memórias e aspectos da personalidade que muitas vezes não encontram saída pela palavra.',
+		'highlight_title' => 'Não é preciso saber desenhar',
+		'highlight_text'  => 'A arteterapia não avalia talento nem resultado estético. O que importa é o processo de criação e o que ele revela.',
+	);
+}
+
+/**
+ * Textos padrão (provisórios) do bloco "Perfil Sobre".
+ *
+ * @return array<string,string>
+ */
+function faruk_about_hero_defaults(): array {
+	return array(
+		'badge'    => 'Sobre',
+		'title'    => 'Faruk',
+		'subtitle' => 'Arteterapeuta e Analista Junguiano',
+		'text'     => 'Uma trajetória dedicada a unir arte, psique e cuidado humano. Acredito que cada pessoa carrega um universo simbólico único — e que a arte é uma das formas mais autênticas de acessá-lo.',
 	);
 }
 
@@ -639,6 +696,26 @@ function faruk_supervision_defaults(): array {
 }
 
 /**
+ * Campo padrão "Fundo da seção", usado em todos os blocos de seção.
+ *
+ * @param string $default Fundo padrão do bloco: 'default', 'sand' ou 'white'.
+ */
+function faruk_bg_field( string $default = 'default' ) {
+	$field = Field::make( 'select', 'background', __( 'Fundo da seção', 'faruk-arteterapia' ) )
+		->set_options(
+			array(
+				'default' => __( 'Padrão (creme)', 'faruk-arteterapia' ),
+				'sand'    => __( 'Areia (creme mais escuro)', 'faruk-arteterapia' ),
+				'white'   => __( 'Branco', 'faruk-arteterapia' ),
+			)
+		)
+		->set_default_value( $default )
+		->set_help_text( __( 'Alterne os fundos entre blocos vizinhos para separar as seções.', 'faruk-arteterapia' ) );
+
+	return $field;
+}
+
+/**
  * Registra os blocos do tema. Cada etapa seguinte adiciona seus blocos aqui.
  */
 function faruk_register_blocks(): void {
@@ -714,6 +791,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'columns' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'eyebrow', __( 'Rótulo da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $d['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título da seção', 'faruk-arteterapia' ) )
@@ -778,13 +856,7 @@ function faruk_register_blocks(): void {
 							'left'  => __( 'À esquerda do texto', 'faruk-arteterapia' ),
 						)
 					),
-				Field::make( 'select', 'background', __( 'Fundo da seção', 'faruk-arteterapia' ) )
-					->set_options(
-						array(
-							'default' => __( 'Padrão', 'faruk-arteterapia' ),
-							'sand'    => __( 'Areia (creme mais escuro)', 'faruk-arteterapia' ),
-						)
-					),
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'label_conscious', __( 'Rótulo da ponta (visível)', 'faruk-arteterapia' ) )
 					->set_default_value( $ib['label_conscious'] ),
 				Field::make( 'text', 'label_unconscious', __( 'Rótulo da parte submersa', 'faruk-arteterapia' ) )
@@ -799,16 +871,164 @@ function faruk_register_blocks(): void {
 			}
 		);
 
-	/* ---- Trajetória e Valores (tela Sobre) ------------------------- */
-	$tv = faruk_trajectory_defaults();
+	/* ---- Hero de Página Interna ------------------------------------ */
+	$ih = faruk_internal_hero_defaults();
 
-	Block::make( __( 'Trajetória e Valores', 'faruk-arteterapia' ) )
-		->set_description( __( 'Trajetória, formação e quatro valores do trabalho (tela Sobre).', 'faruk-arteterapia' ) )
+	Block::make( __( 'Hero de Página Interna', 'faruk-arteterapia' ) )
+		->set_description( __( 'Topo das páginas internas (Arteterapia, Grupos, Contato), com degradê ou imagem de fundo.', 'faruk-arteterapia' ) )
 		->set_category( $category_slug, $category_title, 'heart' )
-		->set_icon( 'awards' )
+		->set_icon( 'cover-image' )
 		->add_fields(
 			array(
-				Field::make( 'separator', 'sep_traj', __( 'Trajetória', 'faruk-arteterapia' ) ),
+				Field::make( 'text', 'badge', __( 'Selo (texto pequeno acima do título)', 'faruk-arteterapia' ) )
+					->set_default_value( $ih['badge'] ),
+				Field::make( 'textarea', 'title', __( 'Título (H1)', 'faruk-arteterapia' ) )
+					->set_rows( 2 )
+					->set_help_text( __( 'Uma quebra de linha vira uma quebra no título.', 'faruk-arteterapia' ) )
+					->set_default_value( $ih['title'] ),
+				Field::make( 'textarea', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )
+					->set_rows( 4 )
+					->set_default_value( $ih['subtitle'] ),
+				Field::make( 'image', 'image', __( 'Imagem de fundo (opcional)', 'faruk-arteterapia' ) )
+					->set_help_text( __( 'Imagem horizontal, com pelo menos 1600 px de largura. Sem imagem, o bloco usa o degradê da marca.', 'faruk-arteterapia' ) ),
+				Field::make( 'select', 'gradient', __( 'Degradê (quando não há imagem)', 'faruk-arteterapia' ) )
+					->set_options(
+						array(
+							'terracota' => __( 'Terracota (Arteterapia)', 'faruk-arteterapia' ),
+							'sage'      => __( 'Verde sálvia (Grupos, Contato)', 'faruk-arteterapia' ),
+						)
+					),
+				Field::make( 'select', 'cta_type', __( 'Botão', 'faruk-arteterapia' ) )
+					->set_options(
+						array(
+							'none'     => __( 'Sem botão', 'faruk-arteterapia' ),
+							'whatsapp' => __( 'WhatsApp', 'faruk-arteterapia' ),
+							'link'     => __( 'Link (página ou âncora)', 'faruk-arteterapia' ),
+						)
+					),
+				Field::make( 'text', 'cta_label', __( 'Texto do botão', 'faruk-arteterapia' ) )
+					->set_default_value( $ih['cta_label'] ),
+				Field::make( 'text', 'cta_url', __( 'Link do botão', 'faruk-arteterapia' ) )
+					->set_conditional_logic(
+						array(
+							array(
+								'field' => 'cta_type',
+								'value' => 'link',
+							),
+						)
+					),
+			)
+		)
+		->set_render_callback(
+			function ( $fields, $attributes, $inner_blocks ) {
+				faruk_render_block( 'internal-hero-block', $fields, $attributes, $inner_blocks );
+			}
+		);
+
+	/* ---- Sobre da Home ("Quem acompanha") --------------------------- */
+	$as = faruk_about_summary_defaults();
+
+	Block::make( __( 'Sobre da Home', 'faruk-arteterapia' ) )
+		->set_description( __( 'Apresentação resumida do Faruk na página inicial ("Quem acompanha").', 'faruk-arteterapia' ) )
+		->set_category( $category_slug, $category_title, 'heart' )
+		->set_icon( 'admin-users' )
+		->add_fields(
+			array(
+				faruk_bg_field( 'default' ),
+				Field::make( 'image', 'photo', __( 'Foto de perfil', 'faruk-arteterapia' ) )
+					->set_help_text( __( 'Foto vertical (4:5), com pelo menos 800 px de largura.', 'faruk-arteterapia' ) ),
+				Field::make( 'text', 'label', __( 'Rótulo', 'faruk-arteterapia' ) )
+					->set_default_value( $as['label'] ),
+				Field::make( 'text', 'title', __( 'Nome', 'faruk-arteterapia' ) )
+					->set_default_value( $as['title'] ),
+				Field::make( 'text', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )
+					->set_default_value( $as['subtitle'] ),
+				Field::make( 'textarea', 'bio_text', __( 'Texto da bio', 'faruk-arteterapia' ) )
+					->set_rows( 6 )
+					->set_help_text( __( 'Separe os parágrafos com uma linha em branco.', 'faruk-arteterapia' ) )
+					->set_default_value( $as['bio_text'] ),
+				Field::make( 'text', 'btn_text', __( 'Texto do botão', 'faruk-arteterapia' ) )
+					->set_default_value( $as['btn_text'] ),
+				Field::make( 'text', 'btn_url', __( 'Link do botão', 'faruk-arteterapia' ) )
+					->set_default_value( $as['btn_url'] ),
+			)
+		)
+		->set_render_callback(
+			function ( $fields, $attributes, $inner_blocks ) {
+				faruk_render_block( 'about-summary-block', $fields, $attributes, $inner_blocks );
+			}
+		);
+
+	/* ---- Definição ("O que é arteterapia?") ------------------------- */
+	$df = faruk_definition_defaults();
+
+	Block::make( __( 'Definição', 'faruk-arteterapia' ) )
+		->set_description( __( 'O que é arteterapia: texto, caixa de destaque e foto dos materiais.', 'faruk-arteterapia' ) )
+		->set_category( $category_slug, $category_title, 'heart' )
+		->set_icon( 'lightbulb' )
+		->add_fields(
+			array(
+				faruk_bg_field( 'default' ),
+				Field::make( 'text', 'eyebrow', __( 'Rótulo', 'faruk-arteterapia' ) )
+					->set_default_value( $df['eyebrow'] ),
+				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
+					->set_default_value( $df['heading'] ),
+				Field::make( 'textarea', 'text', __( 'Texto explicativo', 'faruk-arteterapia' ) )
+					->set_rows( 5 )
+					->set_default_value( $df['text'] ),
+				Field::make( 'text', 'highlight_title', __( 'Caixa de destaque: título', 'faruk-arteterapia' ) )
+					->set_default_value( $df['highlight_title'] ),
+				Field::make( 'textarea', 'highlight_text', __( 'Caixa de destaque: texto', 'faruk-arteterapia' ) )
+					->set_rows( 3 )
+					->set_default_value( $df['highlight_text'] ),
+				Field::make( 'image', 'image', __( 'Foto dos materiais', 'faruk-arteterapia' ) )
+					->set_help_text( __( 'Foto horizontal (4:3), com pelo menos 1000 px de largura.', 'faruk-arteterapia' ) ),
+			)
+		)
+		->set_render_callback(
+			function ( $fields, $attributes, $inner_blocks ) {
+				faruk_render_block( 'definition-block', $fields, $attributes, $inner_blocks );
+			}
+		);
+
+	/* ---- Perfil Sobre (topo da página Sobre) ------------------------ */
+	$ah = faruk_about_hero_defaults();
+
+	Block::make( __( 'Perfil Sobre', 'faruk-arteterapia' ) )
+		->set_description( __( 'Topo da página Sobre: foto grande e introdução da carreira.', 'faruk-arteterapia' ) )
+		->set_category( $category_slug, $category_title, 'heart' )
+		->set_icon( 'id' )
+		->add_fields(
+			array(
+				Field::make( 'image', 'photo', __( 'Foto de perfil', 'faruk-arteterapia' ) )
+					->set_help_text( __( 'Foto vertical (4:5), com pelo menos 800 px de largura.', 'faruk-arteterapia' ) ),
+				Field::make( 'text', 'badge', __( 'Selo', 'faruk-arteterapia' ) )
+					->set_default_value( $ah['badge'] ),
+				Field::make( 'text', 'title', __( 'Nome (H1)', 'faruk-arteterapia' ) )
+					->set_default_value( $ah['title'] ),
+				Field::make( 'text', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )
+					->set_default_value( $ah['subtitle'] ),
+				Field::make( 'textarea', 'text', __( 'Introdução', 'faruk-arteterapia' ) )
+					->set_rows( 5 )
+					->set_default_value( $ah['text'] ),
+			)
+		)
+		->set_render_callback(
+			function ( $fields, $attributes, $inner_blocks ) {
+				faruk_render_block( 'about-hero-block', $fields, $attributes, $inner_blocks );
+			}
+		);
+
+	/* ---- Trajetória (tela Sobre) ------------------------------------ */
+	$tv = faruk_trajectory_defaults();
+
+	Block::make( __( 'Trajetória', 'faruk-arteterapia' ) )
+		->set_description( __( 'Texto narrativo da história profissional ("O caminho até aqui").', 'faruk-arteterapia' ) )
+		->set_category( $category_slug, $category_title, 'heart' )
+		->set_icon( 'text-page' )
+		->add_fields(
+			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'traj_eyebrow', __( 'Rótulo', 'faruk-arteterapia' ) )
 					->set_default_value( $tv['traj_eyebrow'] ),
 				Field::make( 'text', 'traj_heading', __( 'Título', 'faruk-arteterapia' ) )
@@ -817,7 +1037,22 @@ function faruk_register_blocks(): void {
 					->set_rows( 10 )
 					->set_help_text( __( 'Separe os parágrafos com uma linha em branco.', 'faruk-arteterapia' ) )
 					->set_default_value( $tv['traj_text'] ),
+			)
+		)
+		->set_render_callback(
+			function ( $fields, $attributes, $inner_blocks ) {
+				faruk_render_block( 'trajectory-block', $fields, $attributes, $inner_blocks );
+			}
+		);
 
+	/* ---- Formação e Valores (tela Sobre) ---------------------------- */
+	Block::make( __( 'Formação e Valores', 'faruk-arteterapia' ) )
+		->set_description( __( 'Lista de formação e experiência, ao lado dos quatro valores do trabalho.', 'faruk-arteterapia' ) )
+		->set_category( $category_slug, $category_title, 'heart' )
+		->set_icon( 'awards' )
+		->add_fields(
+			array(
+				faruk_bg_field( 'sand' ),
 				Field::make( 'separator', 'sep_form', __( 'Formação e experiência', 'faruk-arteterapia' ) ),
 				Field::make( 'text', 'form_eyebrow', __( 'Rótulo', 'faruk-arteterapia' ) )
 					->set_default_value( $tv['form_eyebrow'] ),
@@ -867,7 +1102,7 @@ function faruk_register_blocks(): void {
 		)
 		->set_render_callback(
 			function ( $fields, $attributes, $inner_blocks ) {
-				faruk_render_block( 'trajectory-values-block', $fields, $attributes, $inner_blocks );
+				faruk_render_block( 'qualifications-values-block', $fields, $attributes, $inner_blocks );
 			}
 		);
 
@@ -880,6 +1115,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'editor-ol' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'sand' ),
 				Field::make( 'text', 'eyebrow', __( 'Rótulo da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $hw['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
@@ -918,6 +1154,17 @@ function faruk_register_blocks(): void {
 		->set_icon( 'art' )
 		->add_fields(
 			array(
+				Field::make( 'select', 'background', __( 'Fundo da seção', 'faruk-arteterapia' ) )
+					->set_options(
+						array(
+							'dark'    => __( 'Verde escuro (faixa destacada)', 'faruk-arteterapia' ),
+							'default' => __( 'Padrão (creme)', 'faruk-arteterapia' ),
+							'sand'    => __( 'Areia (creme mais escuro)', 'faruk-arteterapia' ),
+							'white'   => __( 'Branco', 'faruk-arteterapia' ),
+						)
+					)
+					->set_default_value( 'dark' )
+					->set_help_text( __( 'Alterne os fundos entre blocos vizinhos para separar as seções.', 'faruk-arteterapia' ) ),
 				Field::make( 'text', 'eyebrow', __( 'Rótulo da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $ml['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
@@ -959,6 +1206,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'yes-alt' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'eyebrow', __( 'Rótulo da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $sc['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
@@ -1028,13 +1276,7 @@ function faruk_register_blocks(): void {
 					->set_default_value( $fq['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
 					->set_default_value( $fq['heading'] ),
-				Field::make( 'select', 'background', __( 'Fundo da seção', 'faruk-arteterapia' ) )
-					->set_options(
-						array(
-							'sand'    => __( 'Areia (creme mais escuro)', 'faruk-arteterapia' ),
-							'default' => __( 'Padrão', 'faruk-arteterapia' ),
-						)
-					),
+				faruk_bg_field( 'sand' ),
 				Field::make( 'complex', 'items', __( 'Perguntas', 'faruk-arteterapia' ) )
 					->set_layout( 'tabbed-vertical' )
 					->set_max( 30 )
@@ -1070,6 +1312,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'format-quote' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'sand' ),
 				Field::make( 'text', 'eyebrow', __( 'Rótulo da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $ts['eyebrow'] ),
 				Field::make( 'text', 'heading', __( 'Título', 'faruk-arteterapia' ) )
@@ -1112,6 +1355,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'phone' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'separator', 'sep_wa', __( 'Card do WhatsApp', 'faruk-arteterapia' ) ),
 				Field::make( 'text', 'wa_label', __( 'Subtítulo', 'faruk-arteterapia' ) )->set_default_value( $ct['wa_label'] ),
 				Field::make( 'textarea', 'wa_text', __( 'Texto', 'faruk-arteterapia' ) )->set_rows( 3 )->set_default_value( $ct['wa_text'] ),
@@ -1157,6 +1401,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'megaphone' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'title', __( 'Título', 'faruk-arteterapia' ) )->set_default_value( $fc['title'] ),
 				Field::make( 'textarea', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )->set_rows( 2 )->set_default_value( $fc['subtitle'] ),
 				Field::make( 'text', 'button', __( 'Texto do botão', 'faruk-arteterapia' ) )->set_default_value( $fc['button'] ),
@@ -1177,6 +1422,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'groups' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'section_id', __( 'Âncora da seção', 'faruk-arteterapia' ) )
 					->set_default_value( 'grupos' )
 					->set_help_text( __( 'Usada pelo bloco "Navegação por Âncoras" (sem o #).', 'faruk-arteterapia' ) ),
@@ -1293,6 +1539,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'building' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'sand' ),
 				Field::make( 'text', 'section_id', __( 'Âncora da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $sch['section_id'] )
 					->set_help_text( __( 'Usada pelo bloco "Navegação por Âncoras" (sem o #).', 'faruk-arteterapia' ) ),
@@ -1346,6 +1593,7 @@ function faruk_register_blocks(): void {
 		->set_icon( 'welcome-learn-more' )
 		->add_fields(
 			array(
+				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'section_id', __( 'Âncora da seção', 'faruk-arteterapia' ) )
 					->set_default_value( $sp['section_id'] )
 					->set_help_text( __( 'Usada pelo bloco "Navegação por Âncoras" (sem o #).', 'faruk-arteterapia' ) ),

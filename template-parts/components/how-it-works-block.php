@@ -38,7 +38,7 @@ if ( empty( $steps ) ) {
 
 $extra = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
-<section class="section-padding bg-creme-dark/50<?php echo esc_attr( $extra ); ?>">
+<section class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'sand' ) . $extra ); ?>">
 	<div class="container-wide">
 
 		<div class="mx-auto mb-14 max-w-2xl text-center">

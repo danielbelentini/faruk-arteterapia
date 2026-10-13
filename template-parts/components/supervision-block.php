@@ -48,7 +48,7 @@ $section_id = sanitize_title( $text['section_id'] );
 $extra      = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 $text_class = $image_left ? '' : ' lg:order-first';
 ?>
-<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding<?php echo esc_attr( $extra ); ?>">
+<section id="<?php echo esc_attr( $section_id ); ?>" class="section-padding<?php echo esc_attr( faruk_section_bg_class( $fields, 'default' ) . $extra ); ?>">
 	<div class="container-wide">
 		<div class="grid items-center gap-12 lg:grid-cols-2">
 

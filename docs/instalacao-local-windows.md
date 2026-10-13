@@ -99,11 +99,11 @@ Em cada página, clique no **+** do editor e procure a categoria **Faruk Arteter
 
 | Página | Blocos |
 |---|---|
-| Início | Hero Carrossel · Duas Portas de Entrada · Conceito Iceberg · Depoimentos · Chamada Final WhatsApp |
-| Arteterapia Junguiana | Hero (1 slide, altura compacta) · Conceito Iceberg · Como Funciona · Linguagens e Materiais · Escopo e Limites · FAQ · Depoimentos · Chamada Final |
-| Grupos, projetos e vivências | Hero (compacto) · Navegação por Âncoras · Grupos e Vivências · Escolas e Empresas · Supervisão · Chamada Final |
-| Sobre | Hero (compacto) · Trajetória e Valores · Chamada Final |
-| Contato | Hero (compacto) · Canais de Contato · Chamada Final |
+| Início | Hero Carrossel · Duas Portas de Entrada · Conceito Iceberg · Sobre da Home · Depoimentos · Chamada Final WhatsApp |
+| Arteterapia Junguiana | Hero de Página Interna · Definição · Conceito Iceberg · Como Funciona · Linguagens e Materiais · Escopo e Limites · FAQ · Depoimentos · Chamada Final |
+| Grupos, projetos e vivências | Hero de Página Interna · Navegação por Âncoras · Grupos e Vivências · Escolas e Empresas · Supervisão · Chamada Final |
+| Sobre | Perfil Sobre · Trajetória · Formação e Valores · Chamada Final |
+| Contato | Hero de Página Interna · Canais de Contato · Chamada Final |
 
 ## 8. Menus e opções
 
