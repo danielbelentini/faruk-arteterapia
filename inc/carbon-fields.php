@@ -293,20 +293,6 @@ function faruk_trajectory_defaults(): array {
 }
 
 /**
- * Textos padrão (provisórios) do bloco "Hero de Página Interna".
- *
- * @return array<string,string>
- */
-function faruk_internal_hero_defaults(): array {
-	return array(
-		'badge'     => 'Atendimento individual',
-		'title'     => 'Arteterapia Junguiana',
-		'subtitle'  => 'Um processo terapêutico individual onde a criação artística se encontra com a psique. Um espaço para escutar o que as palavras ainda não alcançam.',
-		'cta_label' => 'Falar pelo WhatsApp',
-	);
-}
-
-/**
  * Textos padrão (provisórios) do bloco "Sobre da Home".
  *
  * @return array<string,string>
@@ -754,6 +740,8 @@ function faruk_register_blocks(): void {
 								->set_rows( 3 ),
 							Field::make( 'image', 'image', __( 'Imagem de fundo', 'faruk-arteterapia' ) )
 								->set_help_text( __( 'Use uma imagem horizontal, com pelo menos 1600 px de largura. Sem imagem, o slide usa um degradê com as cores da marca.', 'faruk-arteterapia' ) ),
+							Field::make( 'image', 'image_mobile', __( 'Imagem de fundo — celular (opcional)', 'faruk-arteterapia' ) )
+								->set_help_text( __( 'Versão leve e mais vertical (ex.: 900 × 1200 px) usada em telas de até 767 px. Se vazia, o celular usa a imagem principal; sem nenhuma imagem, o slide usa o degradê da marca.', 'faruk-arteterapia' ) ),
 							Field::make( 'select', 'cta_type', __( 'Tipo do botão', 'faruk-arteterapia' ) )
 								->set_options(
 									array(
@@ -868,60 +856,6 @@ function faruk_register_blocks(): void {
 		->set_render_callback(
 			function ( $fields, $attributes, $inner_blocks ) {
 				faruk_render_block( 'iceberg-concept-block', $fields, $attributes, $inner_blocks );
-			}
-		);
-
-	/* ---- Hero de Página Interna ------------------------------------ */
-	$ih = faruk_internal_hero_defaults();
-
-	Block::make( __( 'Hero de Página Interna', 'faruk-arteterapia' ) )
-		->set_description( __( 'Topo das páginas internas (Arteterapia, Grupos, Contato), com degradê ou imagem de fundo.', 'faruk-arteterapia' ) )
-		->set_category( $category_slug, $category_title, 'heart' )
-		->set_icon( 'cover-image' )
-		->add_fields(
-			array(
-				Field::make( 'text', 'badge', __( 'Selo (texto pequeno acima do título)', 'faruk-arteterapia' ) )
-					->set_default_value( $ih['badge'] ),
-				Field::make( 'textarea', 'title', __( 'Título (H1)', 'faruk-arteterapia' ) )
-					->set_rows( 2 )
-					->set_help_text( __( 'Uma quebra de linha vira uma quebra no título.', 'faruk-arteterapia' ) )
-					->set_default_value( $ih['title'] ),
-				Field::make( 'textarea', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )
-					->set_rows( 4 )
-					->set_default_value( $ih['subtitle'] ),
-				Field::make( 'image', 'image', __( 'Imagem de fundo (opcional)', 'faruk-arteterapia' ) )
-					->set_help_text( __( 'Imagem horizontal, com pelo menos 1600 px de largura. Sem imagem, o bloco usa o degradê da marca.', 'faruk-arteterapia' ) ),
-				Field::make( 'select', 'gradient', __( 'Degradê (quando não há imagem)', 'faruk-arteterapia' ) )
-					->set_options(
-						array(
-							'terracota' => __( 'Terracota (Arteterapia)', 'faruk-arteterapia' ),
-							'sage'      => __( 'Verde sálvia (Grupos, Contato)', 'faruk-arteterapia' ),
-						)
-					),
-				Field::make( 'select', 'cta_type', __( 'Botão', 'faruk-arteterapia' ) )
-					->set_options(
-						array(
-							'none'     => __( 'Sem botão', 'faruk-arteterapia' ),
-							'whatsapp' => __( 'WhatsApp', 'faruk-arteterapia' ),
-							'link'     => __( 'Link (página ou âncora)', 'faruk-arteterapia' ),
-						)
-					),
-				Field::make( 'text', 'cta_label', __( 'Texto do botão', 'faruk-arteterapia' ) )
-					->set_default_value( $ih['cta_label'] ),
-				Field::make( 'text', 'cta_url', __( 'Link do botão', 'faruk-arteterapia' ) )
-					->set_conditional_logic(
-						array(
-							array(
-								'field' => 'cta_type',
-								'value' => 'link',
-							),
-						)
-					),
-			)
-		)
-		->set_render_callback(
-			function ( $fields, $attributes, $inner_blocks ) {
-				faruk_render_block( 'internal-hero-block', $fields, $attributes, $inner_blocks );
 			}
 		);
 
@@ -1396,12 +1330,11 @@ function faruk_register_blocks(): void {
 	$fc = faruk_final_cta_defaults();
 
 	Block::make( __( 'Chamada Final WhatsApp', 'faruk-arteterapia' ) )
-		->set_description( __( 'Faixa de fechamento com botão do WhatsApp ("Pronto para começar?").', 'faruk-arteterapia' ) )
+		->set_description( __( 'Faixa de fechamento em largura total, com botão do WhatsApp ("Pronto para começar?").', 'faruk-arteterapia' ) )
 		->set_category( $category_slug, $category_title, 'heart' )
 		->set_icon( 'megaphone' )
 		->add_fields(
 			array(
-				faruk_bg_field( 'default' ),
 				Field::make( 'text', 'title', __( 'Título', 'faruk-arteterapia' ) )->set_default_value( $fc['title'] ),
 				Field::make( 'textarea', 'subtitle', __( 'Subtítulo', 'faruk-arteterapia' ) )->set_rows( 2 )->set_default_value( $fc['subtitle'] ),
 				Field::make( 'text', 'button', __( 'Texto do botão', 'faruk-arteterapia' ) )->set_default_value( $fc['button'] ),

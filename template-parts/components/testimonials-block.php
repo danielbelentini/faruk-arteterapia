@@ -78,7 +78,8 @@ $controls_class = 'mt-8 flex items-center justify-center gap-4' . ( $many ? '' :
 			aria-roledescription="carousel"
 			aria-label="<?php echo esc_attr( $heading ); ?>"
 		>
-			<div class="<?php echo $use_swiper ? 'swiper pb-6 pt-2' : 'grid gap-6 md:grid-cols-3'; ?>">
+			<?php // O Swiper corta o que passa da área (overflow hidden) e o CSS dele zera o padding (por isso o ! do Tailwind): o padding vertical dá espaço às sombras e a margem negativa compensa, mantendo o espaçamento original. ?>
+			<div class="<?php echo $use_swiper ? 'swiper !-mb-2 !-mt-8 !py-10' : 'grid gap-6 md:grid-cols-3'; ?>">
 				<div class="<?php echo $use_swiper ? 'swiper-wrapper' : 'contents'; ?>">
 					<?php foreach ( $items as $item ) : ?>
 						<div class="<?php echo $use_swiper ? 'swiper-slide !h-auto' : 'contents'; ?>">

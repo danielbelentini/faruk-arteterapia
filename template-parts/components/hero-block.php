@@ -61,6 +61,7 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 				$title     = isset( $slide['title'] ) ? (string) $slide['title'] : '';
 				$subtitle  = isset( $slide['subtitle'] ) ? (string) $slide['subtitle'] : '';
 				$image_id  = isset( $slide['image'] ) ? absint( $slide['image'] ) : 0;
+				$mobile_id = isset( $slide['image_mobile'] ) ? absint( $slide['image_mobile'] ) : 0;
 				$cta_label = isset( $slide['cta_label'] ) ? (string) $slide['cta_label'] : '';
 				$cta_type  = ( isset( $slide['cta_type'] ) && 'whatsapp' === $slide['cta_type'] ) ? 'whatsapp' : 'link';
 
@@ -83,6 +84,12 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 					<!-- Imagem + overlays -->
 					<div class="absolute inset-0 overflow-hidden">
 						<?php
+						// Só a imagem de celular: vale para todas as telas. As duas: celular até 767 px.
+						if ( ! $image_id && $mobile_id ) {
+							$image_id  = $mobile_id;
+							$mobile_id = 0;
+						}
+
 						if ( $image_id ) {
 							$image_attrs = array(
 								'class'   => 'h-full w-full object-cover group-[.swiper-slide-active]:animate-slow-zoom motion-reduce:animate-none',
@@ -95,7 +102,17 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 								$image_attrs['fetchpriority'] = 'high';
 							}
 
-							echo wp_get_attachment_image( $image_id, 'full', false, $image_attrs ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup gerado pelo WordPress.
+							$mobile_srcset = ( $mobile_id && $mobile_id !== $image_id ) ? wp_get_attachment_image_srcset( $mobile_id, 'large' ) : '';
+
+							if ( $mobile_srcset ) {
+								// <picture>: o celular baixa só a imagem de celular; o desktop, só a principal.
+								echo '<picture class="block h-full w-full">';
+								echo '<source media="(max-width: 767px)" srcset="' . esc_attr( $mobile_srcset ) . '" sizes="100vw" />';
+								echo wp_get_attachment_image( $image_id, 'full', false, $image_attrs ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup gerado pelo WordPress.
+								echo '</picture>';
+							} else {
+								echo wp_get_attachment_image( $image_id, 'full', false, $image_attrs ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup gerado pelo WordPress.
+							}
 						} else {
 							// Sem imagem: degradê com as cores da marca.
 							echo '<div class="h-full w-full bg-gradient-to-br from-terracota-dark via-terracota to-sage-dark"></div>';
