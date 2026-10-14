@@ -123,7 +123,7 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 					<div class="absolute inset-0 bg-gradient-to-t from-marrom/60 via-transparent to-transparent"></div>
 
 					<!-- Conteúdo -->
-					<div class="relative z-10 mx-auto flex h-full max-w-8xl items-center px-6 md:px-12 lg:px-16">
+					<div class="relative z-10 mx-auto box-content flex h-full max-w-8xl items-center px-6 md:px-12 lg:px-16">
 						<div class="max-w-2xl">
 							<?php if ( '' !== $badge ) : ?>
 								<span class="inline-block rounded-full bg-laranja/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-laranja-light ring-1 ring-laranja/30 backdrop-blur-sm group-[.swiper-slide-active]:animate-fade-in motion-reduce:animate-none">
@@ -201,7 +201,7 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 
 		<!-- Pausa (discreto, alinhado ao texto, à esquerda) -->
 		<div class="pointer-events-none absolute inset-x-0 bottom-[18px] z-20">
-			<div class="mx-auto max-w-8xl px-6 md:px-12 lg:px-16">
+			<div class="mx-auto box-content max-w-8xl px-6 md:px-12 lg:px-16">
 				<button
 					type="button"
 					data-hero-pause

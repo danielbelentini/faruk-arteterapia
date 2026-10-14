@@ -39,7 +39,7 @@ if ( empty( $items ) ) {
 $extra = ! empty( $attributes['className'] ) ? ' ' . $attributes['className'] : '';
 ?>
 <nav class="border-b border-creme-dark bg-white py-8<?php echo esc_attr( $extra ); ?>" aria-label="<?php echo esc_attr( $label ); ?>">
-	<div class="container-wide px-6 md:px-12 lg:px-16">
+	<div class="container-wide box-content px-6 md:px-12 lg:px-16">
 		<div class="flex flex-col items-center gap-4 md:flex-row md:justify-center md:gap-8">
 			<span class="text-sm font-medium text-marrom/50"><?php echo esc_html( $label ); ?></span>
 			<?php foreach ( $items as $item ) : ?>

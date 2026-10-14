@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 	<footer class="bg-marrom text-creme">
-		<div class="mx-auto max-w-8xl px-6 py-16 md:px-12 lg:px-16">
+		<div class="mx-auto box-content max-w-8xl px-6 py-16 md:px-12 lg:px-16">
 			<div class="grid gap-12 lg:grid-cols-4">
 
 				<!-- Logo + identificação -->

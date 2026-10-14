@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div id="page" class="flex min-h-screen flex-col">
 
 	<header id="site-header" class="fixed inset-x-0 top-0 z-50 bg-creme/80 backdrop-blur-sm transition-all duration-500">
-		<div class="mx-auto flex max-w-8xl items-center justify-between px-6 py-4 md:px-12 lg:px-16">
+		<div class="mx-auto box-content flex max-w-8xl items-center justify-between px-6 py-4 md:px-12 lg:px-16">
 
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="transition-transform hover:scale-105" aria-label="<?php esc_attr_e( 'Faruk — Arteterapia Junguiana, página inicial', 'faruk-arteterapia' ); ?>">
 				<?php

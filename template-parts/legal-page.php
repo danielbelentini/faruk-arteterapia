@@ -20,7 +20,7 @@ get_header();
 <main id="main" class="flex-1">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<section class="bg-gradient-to-br from-sage-dark via-sage-dark to-terracota-dark pb-16 pt-32 text-white md:pb-20 md:pt-40">
-			<div class="container-wide px-6 md:px-12 lg:px-16">
+			<div class="container-wide box-content px-6 md:px-12 lg:px-16">
 				<div class="mx-auto max-w-3xl">
 					<span class="inline-block rounded-full bg-laranja/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-laranja-light ring-1 ring-laranja/30">
 						<?php esc_html_e( 'Documento legal', 'faruk-arteterapia' ); ?>
