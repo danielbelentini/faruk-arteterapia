@@ -742,21 +742,34 @@ function faruk_register_blocks(): void {
 								->set_help_text( __( 'Use uma imagem horizontal, com pelo menos 1600 px de largura. Sem imagem, o slide usa um degradê com as cores da marca.', 'faruk-arteterapia' ) ),
 							Field::make( 'image', 'image_mobile', __( 'Imagem de fundo — celular (opcional)', 'faruk-arteterapia' ) )
 								->set_help_text( __( 'Versão leve e mais vertical (ex.: 900 × 1200 px) usada em telas de até 767 px. Se vazia, o celular usa a imagem principal; sem nenhuma imagem, o slide usa o degradê da marca.', 'faruk-arteterapia' ) ),
-							Field::make( 'select', 'cta_type', __( 'Tipo do botão', 'faruk-arteterapia' ) )
+							Field::make( 'select', 'cta_type', __( 'Botão', 'faruk-arteterapia' ) )
 								->set_options(
 									array(
-										'whatsapp' => __( 'WhatsApp', 'faruk-arteterapia' ),
-										'link'     => __( 'Link (página ou âncora)', 'faruk-arteterapia' ),
+										'whatsapp'   => __( 'WhatsApp (botão verde)', 'faruk-arteterapia' ),
+										'link'       => __( 'Link (botão terracota)', 'faruk-arteterapia' ),
+										'link_green' => __( 'Link (botão verde)', 'faruk-arteterapia' ),
+										'none'       => __( 'Sem botão', 'faruk-arteterapia' ),
+									)
+								)
+								->set_default_value( 'whatsapp' ),
+							Field::make( 'text', 'cta_label', __( 'Texto do botão', 'faruk-arteterapia' ) )
+								->set_conditional_logic(
+									array(
+										array(
+											'field'   => 'cta_type',
+											'value'   => 'none',
+											'compare' => '!=',
+										),
 									)
 								),
-							Field::make( 'text', 'cta_label', __( 'Texto do botão', 'faruk-arteterapia' ) ),
 							Field::make( 'text', 'cta_url', __( 'Link do botão', 'faruk-arteterapia' ) )
 								->set_help_text( __( 'Exemplo: /grupos-projetos-e-vivencias/#ciclo-princesas', 'faruk-arteterapia' ) )
 								->set_conditional_logic(
 									array(
 										array(
-											'field' => 'cta_type',
-											'value' => 'link',
+											'field'   => 'cta_type',
+											'value'   => array( 'link', 'link_green' ),
+											'compare' => 'IN',
 										),
 									)
 								),

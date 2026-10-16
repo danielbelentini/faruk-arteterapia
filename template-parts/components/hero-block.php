@@ -63,7 +63,11 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 				$image_id  = isset( $slide['image'] ) ? absint( $slide['image'] ) : 0;
 				$mobile_id = isset( $slide['image_mobile'] ) ? absint( $slide['image_mobile'] ) : 0;
 				$cta_label = isset( $slide['cta_label'] ) ? (string) $slide['cta_label'] : '';
-				$cta_type  = ( isset( $slide['cta_type'] ) && 'whatsapp' === $slide['cta_type'] ) ? 'whatsapp' : 'link';
+				$cta_type  = ( isset( $slide['cta_type'] ) && in_array( $slide['cta_type'], array( 'whatsapp', 'link', 'link_green', 'none' ), true ) ) ? $slide['cta_type'] : 'link';
+
+				// Botões: 'none' não mostra nada; 'whatsapp' e 'link_green' são verdes.
+				$cta_green = in_array( $cta_type, array( 'whatsapp', 'link_green' ), true );
+				$cta_show  = ( 'none' !== $cta_type && '' !== $cta_label );
 
 				if ( 'whatsapp' === $cta_type ) {
 					$cta_href  = faruk_whatsapp_url();
@@ -141,11 +145,11 @@ $extra_class    = ! empty( $attributes['className'] ) ? ' ' . $attributes['class
 								</p>
 							<?php endif; ?>
 
-							<?php if ( '' !== $cta_label ) : ?>
+							<?php if ( $cta_show ) : ?>
 								<a
 									href="<?php echo $cta_href; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- já escapado (faruk_whatsapp_url / faruk_resolve_link). ?>"
 									<?php echo 'whatsapp' === $cta_type ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>
-									class="mt-8 inline-flex items-center gap-2 rounded-full bg-terracota-light px-8 py-4 text-base font-semibold text-white transition-all duration-300 [animation-delay:200ms] hover:-translate-y-0.5 hover:bg-terracota hover:shadow-xl hover:shadow-terracota/30 group-[.swiper-slide-active]:animate-fade-in-up motion-reduce:animate-none"
+									class="<?php echo $cta_green ? 'bg-[#25D366] hover:bg-[#1eb858] hover:shadow-green-600/30' : 'bg-terracota-light hover:bg-terracota hover:shadow-terracota/30'; ?> mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-white transition-all duration-300 [animation-delay:200ms] hover:-translate-y-0.5 hover:shadow-xl group-[.swiper-slide-active]:animate-fade-in-up motion-reduce:animate-none"
 									data-gtm-event="<?php echo esc_attr( $cta_event ); ?>"
 									data-gtm-location="hero"
 									data-gtm-item="<?php echo esc_attr( $title ); ?>"
