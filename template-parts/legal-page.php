@@ -19,7 +19,7 @@ get_header();
 
 <main id="main" class="flex-1">
 	<?php while ( have_posts() ) : the_post(); ?>
-		<section class="bg-gradient-to-br from-sage-dark via-sage-dark to-terracota-dark pb-16 pt-32 text-white md:pb-20 md:pt-40">
+		<section class="hero-offset bg-gradient-to-br from-sage-dark via-sage-dark to-terracota-dark pb-16 pt-[calc(var(--header-h)+4rem)] text-white md:pb-20 md:pt-[calc(var(--header-h)+6rem)]">
 			<div class="container-wide box-content px-6 md:px-12 lg:px-16">
 				<div class="mx-auto max-w-3xl">
 					<span class="inline-block rounded-full bg-laranja/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-laranja-light ring-1 ring-laranja/30">

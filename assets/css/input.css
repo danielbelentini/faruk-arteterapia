@@ -48,6 +48,11 @@
  * Base (equivalente ao index.css do protótipo, com as cores oficiais)
  * ---------------------------------------------------------------- */
 @layer base {
+	:root {
+		/* Altura aproximada do header fixo (logo + padding). */
+		--header-h: 5rem;
+	}
+
 	html {
 		scroll-behavior: smooth;
 		/* Âncoras (#grupos etc.) não ficam escondidas atrás do header fixo. */
@@ -105,6 +110,27 @@
 
 	.container-wide {
 		@apply mx-auto max-w-8xl;
+	}
+
+	/*
+	 * Header fixo: ele cobre o topo da primeira seção da página. Quando essa
+	 * seção NÃO é um hero (ex.: Contato, que começa nos canais), somamos a
+	 * altura do header ao padding de cima para manter o respiro normal.
+	 * Heros têm o próprio espaçamento e levam a classe .hero-offset
+	 * (o carrossel, .hero-carousel, trata o conteúdo no próprio template).
+	 * O bloco Canais de Contato envolve as seções em uma <div>, por isso
+	 * há um segundo seletor.
+	 */
+	main > section:first-child:not(.hero-carousel):not(.hero-offset),
+	main > div:first-child > section:first-child:not(.hero-offset) {
+		padding-top: calc(var(--header-h) + 5rem);
+	}
+
+	@media (min-width: 1024px) {
+		main > section:first-child:not(.hero-carousel):not(.hero-offset),
+		main > div:first-child > section:first-child:not(.hero-offset) {
+			padding-top: calc(var(--header-h) + 7rem);
+		}
 	}
 
 	.text-gradient {

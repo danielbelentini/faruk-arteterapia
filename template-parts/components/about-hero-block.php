@@ -25,7 +25,7 @@ foreach ( $defaults as $key => $default ) {
 
 $photo_id = isset( $fields['photo'] ) ? absint( $fields['photo'] ) : 0;
 ?>
-<section class="relative overflow-hidden bg-gradient-to-br from-marrom via-terracota-dark to-sage-dark pt-32 pb-20 text-white md:pt-40 md:pb-28<?php echo esc_attr( $extra ); ?>">
+<section class="hero-offset relative overflow-hidden bg-gradient-to-br from-marrom via-terracota-dark to-sage-dark pt-[calc(var(--header-h)+4rem)] pb-20 text-white md:pt-[calc(var(--header-h)+6rem)] md:pb-28<?php echo esc_attr( $extra ); ?>">
 	<div class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-terracota-light/10 blur-3xl"></div>
 	<div class="absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-laranja/10 blur-3xl"></div>
 
