@@ -12,6 +12,7 @@
  *   3. dataLayer (GTM): delegação de cliques com data-gtm-*
  *   4. FAQ (accordion)
  *   5. Banner de cookies / Google Consent Mode v2 (LGPD)
+ *   6. Botão "voltar ao topo"
  *
  * Rolagem suave e offset do header fixo nas âncoras são feitos em CSS
  * (html { scroll-behavior: smooth; scroll-padding-top }), em input.css.
@@ -351,5 +352,65 @@
 		if ( readChoice() === null ) {
 			showBanner( false );
 		}
+	} );
+
+	/* ------------------------------------------------------------
+	 * 6. Voltar ao topo
+	 *
+	 * O botão [data-back-to-top] (footer.php) aparece, com fade, depois
+	 * que a primeira dobra (a altura da janela) é rolada, em qualquer
+	 * página. Ao clicar, volta ao topo (suave, salvo "reduzir movimento").
+	 * ---------------------------------------------------------- */
+	safe( function () {
+		var button = document.querySelector( '[data-back-to-top]' );
+
+		if ( ! button ) {
+			return;
+		}
+
+		var hidden = [ 'invisible', 'opacity-0', 'translate-y-2' ];
+		var shown = [ 'visible', 'opacity-100', 'translate-y-0' ];
+		var isVisible = null;
+		var ticking = false;
+
+		function setVisible( show ) {
+			if ( show === isVisible ) {
+				return;
+			}
+
+			isVisible = show;
+
+			hidden.forEach( function ( cls ) {
+				button.classList.toggle( cls, ! show );
+			} );
+
+			shown.forEach( function ( cls ) {
+				button.classList.toggle( cls, show );
+			} );
+		}
+
+		function update() {
+			ticking = false;
+			setVisible( window.scrollY > window.innerHeight * 0.9 );
+		}
+
+		window.addEventListener(
+			'scroll',
+			function () {
+				if ( ! ticking ) {
+					ticking = true;
+					window.requestAnimationFrame( update );
+				}
+			},
+			{ passive: true }
+		);
+
+		button.addEventListener( 'click', function () {
+			var reduce = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+			window.scrollTo( { top: 0, behavior: reduce ? 'auto' : 'smooth' } );
+		} );
+
+		update();
 	} );
 }() );

@@ -152,6 +152,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<span class="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-20 motion-reduce:animate-none" aria-hidden="true"></span>
 	</a>
 
+	<!-- Voltar ao topo: aparece (fade) depois da primeira dobra; ver main.js, módulo 6 -->
+	<button
+		type="button"
+		data-back-to-top
+		class="invisible fixed bottom-[92px] right-[30px] z-40 flex h-11 w-11 translate-y-2 items-center justify-center rounded-full bg-white text-terracota opacity-0 shadow-lg shadow-marrom/10 ring-1 ring-marrom/10 transition-all duration-300 hover:bg-terracota hover:text-white focus-visible:visible motion-reduce:transition-none"
+		aria-label="<?php esc_attr_e( 'Voltar ao topo', 'faruk-arteterapia' ); ?>"
+	>
+		<?php faruk_the_icon( 'arrow-up', 'h-5 w-5' ); ?>
+	</button>
+
 </div><!-- #page -->
 
 <?php

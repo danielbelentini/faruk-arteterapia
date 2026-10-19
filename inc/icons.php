@@ -26,6 +26,7 @@ function faruk_icon_paths(): array {
 		'instagram'       => '<rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>',
 		'arrow-up-right'  => '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
 		'arrow-right'     => '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+		'arrow-up'        => '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
 		'chevron-left'    => '<path d="m15 18-6-6 6-6"/>',
 		'chevron-right'   => '<path d="m9 18 6-6-6-6"/>',
 		'pause'           => '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>',
